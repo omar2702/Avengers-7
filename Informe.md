@@ -43,7 +43,6 @@ a)	Nodo raíz
 b)	Subárbol izquierdo
 c)	Subárbol derecho
        
-Los elementos que tienen como valor nulo en la izquierda y en  derecha son los hijos. La raíz es el elemento A y los nodos raíces son los elementos B, V y D.
 IV.	Árbol Binario de búsqueda (ABB), no tiene valores duplicados en los nodos y además, tiene la característica de que:
 1.	Los valores en cualquier subárbol izquierdo son menores que el valor en su nodo padre.
 2.	Los valores en cualquier subárbol derecho son mayores que el valor en su nodo padre.
