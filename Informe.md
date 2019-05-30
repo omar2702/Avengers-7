@@ -18,11 +18,17 @@ En vase a lo que hemos aprendido, podemos crear base de datos eficientes que son
 II)Objetivos
 ------------
 •	Describir que es indexación en base-0.
+
 •	Manipular y extraer datos usando encabezados de columnas e índices.
+
 •	Usar ‘slicing’ para seleccionar conjuntos de datos de un ‘DataFrame’.
+
 •	Emplear etiquetas e índices enteros para seleccionar rangos de datos en un ‘DataFrame’.
+
 •	Reasignar valores dentro de subconjuntos de datos de un ‘DataFrame’.
+
 •	Crear una copia de un ‘DataFrame’.
+
 •	Consultar/Seleccionar un subconjunto de datos usando un conjunto de criterios utilizando los siguientes operadores: =, !=, >, <, >=, <=.
 
 
