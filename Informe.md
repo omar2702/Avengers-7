@@ -17,6 +17,7 @@ d)Conclusión:
 II)Objetivos
 ------------
 
+
 III)Marco Teorico
 -----------------
 I.   DataFrame, es una hoja de datos, en lo que cada fila corresponde a un sujeto y cada columna a una variable. La estructura de un DataFrame es muy similar a la de una matriz. La diferencia es que una matríz sólo admite valores numéricos, mientras que un DataFrame podemos incluir datos alfanuméricos.
@@ -27,9 +28,30 @@ III. Árbol Binario, es un árbol de orden 2. Se conoce el nodo de la izquierda 
 a)	Nodo raíz
 b)	Subárbol izquierdo
 c)	Subárbol derecho
-               Para ello necesitaos la estructura del Nodo que es lo siguie
+          
+(code)
 
-struct{ int elem; Nodo *der; Nodo *izq;
-___
 Sabiendo esto la estructura del árbol binario es lo siguiente:
+
+(image)
+
+Los elementos que tienen como valor nulo en la izquierda y en  derecha son los hijos. La raíz es el elemento A y los nodos raíces son los elementos B, V y D.
+IV.	Árbol Binario de búsqueda (ABB), no tiene valores duplicados en los nodos y además, tiene la característica de que:
+1.	Los valores en cualquier subárbol izquierdo son menores que el valor en su nodo padre.
+2.	Los valores en cualquier subárbol derecho son mayores que el valor en su nodo padre.
+Es una de las tantas formas de indexar la información, se usa más en bases de datos para poder ejecutar las querys más rápido.
+El sistema responde más rápido por que no tiene que hacer validaciones por cada elemento, sino más bien por bloques, si el criterio especificado entra en el rango de este nodo corresponde entonces miro adentro para sustraerlo.
+
+(image)
+
+V.	Ordenamiento de vectores, debido a que las estructuras de datos son utilizadas para almacenar información, para poder recuperar esa información de manera eficiente es deseable que aquella esté ordenada. Existen varios métodos para ordenar las diferentes estructuras de datos básicas.
+Los métodos de ordenamiento no son utilizados con frecuencia, en algunos casos sólo una vez. Hay métodos muy simples de implementar que son útiles en los casos en dónde el número de elementos a ordenar no es muy grande (ejemplo, menos de 500 elementos). Por otro lado hay métodos sofisticados, más difíciles de implementar pero que son más eficientes en cuestión de tiempo de ejecución
+Los métodos simples son: insertion sort (o por inserción directa) selection sort, bubble sort, y shellsort, en dónde el último es una extensón al insertion sort, siendo más rápido. Los métodos más complejos son el quick-sort, el heap sort, radix y address-calculation sort. El ordenar un grupo de datos significa mover los datos o sus referencias para que queden en una secuencia tal que represente un orden, el cual puede ser numérico, alfabético o incluso alfanumérico, ascendente o descendente.
+
+
+
+
+
+
+
 
