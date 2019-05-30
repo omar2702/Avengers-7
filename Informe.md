@@ -54,6 +54,12 @@ Hay métodos muy simples de implementar que son útiles en los casos en dónde e
 Los métodos simples son: insertion sort (o por inserción directa) selection sort, bubble sort, y shellsort, en dónde el último es una extensón al insertion sort, siendo más rápido. Los métodos más complejos son el quick-sort, el heap sort, radix y address-calculation sort. El ordenar un grupo de datos significa mover los datos o sus referencias para que queden en una secuencia tal que represente un orden, el cual puede ser numérico, alfabético o incluso alfanumérico, ascendente o descendente.
 
 
+IV) Cronograma
+---------------
+Los cronogramas podran ser visualizados en Github Milestones
+
+
+
 
 
 
