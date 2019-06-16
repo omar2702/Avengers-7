@@ -53,7 +53,7 @@ public:
 	void PrintF() {
 		cout << " " << index << "\t";
 		for (long long i = 0; i < Cvector->size(); i++) {
-			Cvector->at(i)->PrintC;
+			Cvector->at(i)->PrintC();
 		}
 	}
 

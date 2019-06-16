@@ -2,20 +2,20 @@
 #include"columna.h"
 #include"Fila.h"
 
-class dataframe {
+class DF {
 private:
 	vector<fila*>*Fvector;
 	vector<fila*>::iterator it;
 	vector<columna*>*COvector;
 	vector<columna*>::iterator it2;
 public:
-	dataframe() {
+	DF() {
 		Fvector = new vector<fila*>;
 		it = Fvector->begin();
 		COvector = new vector<columna*>;
 		it2 = COvector->begin();
 	}
-	~dataframe() {
+	DF() {
 		for (fila* f : *Fvector)
 			delete f;
 		for (columna* c : *COvector)

@@ -49,7 +49,7 @@ public:
 	void PrintC() {
 		cout << " " << name << "\t";
 		for (long long i = 0; i < Cvector->size(); i++) {
-			(*Cvector->at(i))->PrintC;
+			(*Cvector->at(i))->PrintC();
 		}
 		cout << endl;
 	}
