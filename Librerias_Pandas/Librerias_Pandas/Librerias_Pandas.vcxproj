@@ -124,13 +124,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Camp.h" />
-    <ClInclude Include="columna 2.h" />
-    <ClInclude Include="columna.h" />
+    <ClInclude Include="Columna.h" />
     <ClInclude Include="DataFrame.h" />
-    <ClInclude Include="DataFrameReal.h" />
-    <ClInclude Include="Driver.h" />
-    <ClInclude Include="Fila 2.h" />
     <ClInclude Include="Fila.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,60 +1,79 @@
 #pragma once
-#include"Camp.h"
-#include<vector>
+
+#include <string>
+#include "Columna.h"
+#include <vector>
+#include<iostream>
+
 using namespace std;
-class fila
-{
-protected:
-	long long index;
-	vector<camp*>*Cvector;
-	vector<camp*>::iterator it;
+
+class Fila {
+
+private:
+
+	long long Indice = 0;
+	string datoString;
+	long long datoLong;
+	double datoDouble;
+	bool datoBool;
+	//////////////////////////////////////
+	ColumnaString	*ColString; 
+	ColumnaLong		*ColLong;
+	ColumnaDouble	*ColDouble;
+	ColumnaBool		*ColBool;
+
 public:
-	fila(long long i) : index(i) {
-		Cvector = new vector<camp*>;
-		it = Cvector->begin();
-	}
-	~fila() {
-		for (camp* a : *Cvector)
-			delete a;
-		delete Cvector;
-	}
-	void setIndex(long long i) { index = i; }
-	long long getindex() { return index; }
-
-	void upIterator()
-	{
-		it = Cvector->begin();
-	}
-	void push_back(camp *c)
-	{
-		Cvector->push_back(c);
-	}
-	void insertar(camp* a, long long pos)
-	{
-		upIterator();
-		Cvector->erase(it + pos);
-	}
-	void borrar(long long pos)
-	{
-		upIterator();
-		Cvector->erase(it + pos);
-	}
-	void borrar(long long first, long long last) {
-		upIterator();
-		Cvector->erase(it + first, it + last);
+	Fila(int ind) : Indice(ind) {
+		datoString = "";
+		datoLong = NULL;
+		datoDouble = NULL;
+		datoBool = NULL;
+		ColString = nullptr;
+		ColLong = nullptr;
+		ColDouble = nullptr;
+		ColBool = nullptr;
 	}
 
-	camp* at(long long pos) {
-		return Cvector->at(pos);
+	Fila(int ind, ColumnaString* CS, ColumnaLong* CL, ColumnaDouble* CD, ColumnaBool* CB) {
+		setPunteroString(CS);
+        setPunteroLong(CL);
+		setPunteroDouble(CD);
+		setPunteroBool(CB);
+		AsignarDatos();
 	}
-	camp**atpoint(long long pos) {
-		return &Cvector->at(pos);
+	~Fila() {
+		delete ColString;
+		delete ColLong;
+		delete ColDouble;
+		delete ColBool;
 	}
-	void PrintF() {
-		cout << " " << index << "\t";
-		for (long long i = 0; i < Cvector->size(); i++) {
-			Cvector->at(i)->PrintC();
-		}
+	void AsignarDatos() {
+		if (ColString != nullptr)
+			datoString = ColString->getDato(this->Indice);
+		if (ColLong != nullptr)
+			datoLong = ColLong->getDato(this->Indice);
+		if (ColDouble != nullptr)
+			datoDouble = ColDouble->getDato(this->Indice);
+		if (ColBool != nullptr)
+			datoBool = ColBool->getDato(this->Indice);
 	}
+
+	long long getIndice() { return this->Indice; }
+	string getString() { return this->datoString; }
+	long long getLong() { return this->datoLong; }
+	double getDouble() { return this->datoDouble; }
+	bool getBool() { return this->datoBool; }
+	void setString(string S) { this->datoString = S; }
+	void setLong(long long L) { this->datoLong = L; }
+	void setDouble(double D) { this->datoDouble = D; }
+	void setBool(bool B) { this->datoBool = B; }
+	void setPunteroString(ColumnaString* CS) {this->ColString = CS;}
+	void setPunteroLong(ColumnaLong* CL) {	this->ColLong = CL;}
+	void setPunteroDouble(ColumnaDouble* CD) {this->ColDouble = CD;}
+	void setPunteroBool(ColumnaBool* CB) {	this->ColBool = CB;}
+	void mostrar() { 
+		cout << "| " << datoString << " |\t" << "| " << datoLong << " |\t" << "| " << datoDouble << " |\t" << "| " << datoBool << " |" << endl;
+	}
+	
 
 };

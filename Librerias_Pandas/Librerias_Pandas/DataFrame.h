@@ -1,73 +1,85 @@
 #pragma once
-#include"columna.h"
+#include"Columna.h"
 #include"Fila.h"
 
-class DF {
+class DataFrame
+{
 private:
-	vector<fila*>*Fvector;
-	vector<fila*>::iterator it;
-	vector<columna*>*COvector;
-	vector<columna*>::iterator it2;
+	long long numero_filas = 0;
+	long long numero_columnas = 0;
 public:
-	DF() {
-		Fvector = new vector<fila*>;
-		it = Fvector->begin();
-		COvector = new vector<columna*>;
-		it2 = COvector->begin();
-	}
-	DF() {
-		for (fila* f : *Fvector)
-			delete f;
-		for (columna* c : *COvector)
-			delete c;
-		delete Fvector, COvector;
-	}
-	void Upiterator() { it = Fvector->begin(); }
-	void push_back(fila *f) {
-		Fvector->push_back(f);
-	}
-	void insertar(fila *f, long long pos)
+	vector<Fila*>* Filas;
+	vector < Columna*>*Columnas;
+	DataFrame()
 	{
-		Upiterator();
-		Fvector->insert(it + pos, f);
+		Filas = new vector<Fila*>;
+		Columnas = new vector<Columna*>;
+		agregar_Columna_Bool();
+		agregar_Columna_double();
+		agregar_Columna_long();
+		agregar_Columna_String();
 	}
-	void borrar(long long pos) {
-		Upiterator();
-		Fvector->erase(it + pos);
-	}
-	void borrar(long long first, long long last)
-	{
-		Upiterator();
-		Fvector->erase(it + first, it + last);
-	}
-	fila *at(long long pos) { return Fvector->at(pos); }
 
-	///////Columna///////
-	void UpiteratorCO() { it2 = COvector->begin(); }
-	void push_backCO(columna *c) {
-		COvector->push_back(c);
-	}
-	void insertatCO(columna *c, long long pos) {
-		UpiteratorCO();
-		COvector->insert(it2 + pos, c);
-	}
-	void borrarCO(long long pos)
+	void agregar_Fila()
 	{
-		UpiteratorCO();
-		COvector->erase(it2 + pos);
-	}
-	void borrarCO(long long first, long long last)
-	{
-		UpiteratorCO();
-		COvector->erase(it2 + first, it2 + last);
-	}
-	columna* atCO(long long pos) { return COvector->at(pos); }
+		/*long long I = 0;
+		Filas* aux = new Filas(I);
 
-	void PrintD() {
-		for (long long i = 0; i < Fvector->size(); i++) {
-			Fvector->at(i)->PrintF();
+		Filas->push_back(aux);
+
+		for (long long i = 0; i < numero_columnas; i++) {
+
+			if (Columnas->at(i)->getTipo() == "String")
+
+				aux->setPunteroString((ColumnaString*)Columnas->at(i));
+
+			if (Columnas->at(i)->getTipo() == "Long")
+
+				aux->setPunteroLong((ColumnaLong*)Columnas->at(i));
+
+			if (Columnas->at(i)->getTipo() == "Double")
+
+				aux->setPunteroDouble((ColumnaDouble*)Columnas->at(i));
+
+			if (Columnas->at(i)->getTipo() == "Bool")
+
+				aux->setPunteroBool((ColumnaBool*)Columnas->at(i));
+
 		}
+
+		aux->AsignarDatos();
+
+		numero_filas++;
+
+		I++;*/
+	}
+
+	void agregar_Columna_String()
+	{
+		Columnas->push_back(new ColumnaString());
+		numero_columnas++;
+	}
+	void agregar_Columna_Bool()
+	{
+		Columnas->push_back(new ColumnaBool());
+	}
+	void agregar_Columna_double()
+	{
+		Columnas->push_back(new ColumnaDouble());
+	}
+	void agregar_Columna_long()
+	{
+		Columnas->push_back(new ColumnaLong());
+	}
+	void mostrar() { 
+
+		cout << "String \t Long \t Double \t Bool" << endl; //Falta hacer que se alineen bien los nombres de las columnas
+
+		for (long long i = 0; i < numero_filas; i++) {
+
+			Filas->at(i)->mostrar();
+
+		}
+
 	}
 };
-
-
