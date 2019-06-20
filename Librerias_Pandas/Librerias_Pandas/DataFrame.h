@@ -6,7 +6,7 @@ class DataFrame
 {
 private:
 	long long numero_filas = 0;
-	long long numero_columnas = 0;
+	long long numero_columnas = 0;//preguntar al profe
 public:
 	vector<Fila*>* Filas;
 	vector < Columna*>*Columnas;
