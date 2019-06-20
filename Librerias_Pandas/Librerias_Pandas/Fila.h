@@ -1,5 +1,5 @@
 #pragma once
-
+#include<map>
 #include <string>
 #include "Columna.h"
 #include <vector>
@@ -8,7 +8,6 @@
 using namespace std;
 
 class Fila {
-
 private:
 
 	long long Indice = 0;
@@ -21,6 +20,18 @@ private:
 	ColumnaLong		*ColLong;
 	ColumnaDouble	*ColDouble;
 	ColumnaBool		*ColBool;
+
+	//typedef map<string, Col*> colmap;
+
+	//Fila(map<string>, Col*>* cols): cols(cols){}
+
+	/*void getData(string name) {
+	return (*cols)[name][idx];
+	}*/
+
+	/*Fila(int ind, string str, double doub, long long lon, bool boo, ColumnaString *colS, ColumnaLong *colL,
+		ColumnaDouble *colD, ColumnaBool *colB) : indice(ind), datoString(str), datoLong(lon), datoDouble(doub), datoBool(boo),
+		ColString(colS), ColLong(colL), ColDouble(colD), ColBool(colB) {}*/
 
 public:
 	Fila(int ind) : Indice(ind) {
@@ -71,7 +82,8 @@ public:
 	void setPunteroLong(ColumnaLong* CL) {	this->ColLong = CL;}
 	void setPunteroDouble(ColumnaDouble* CD) {this->ColDouble = CD;}
 	void setPunteroBool(ColumnaBool* CB) {	this->ColBool = CB;}
-	void mostrar() { 
+	
+	void mostrar() {  //Se eiminara mas adelante, al hacer un lambda en main.cpp
 		cout << "| " << datoString << " |\t" << "| " << datoLong << " |\t" << "| " << datoDouble << " |\t" << "| " << datoBool << " |" << endl;
 	}
 	

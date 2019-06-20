@@ -1,21 +1,13 @@
 #pragma once
-
 #include <string>
-
 #include <vector>
-
 using namespace std;
 
-
-
 class Columna {
-
 protected:
-
 	string tipoDeDato;
 
 public:
-
 	Columna(string tipo) : tipoDeDato(tipo) {}
 	string getTipo() { return tipoDeDato; }			//Devuelve el "nombre" de la columna  El nombre de una columna indica que tipo de datos contiene
 	void setTipo(string t) { this->tipoDeDato = t; } //Cambia el "nombre" de la columna

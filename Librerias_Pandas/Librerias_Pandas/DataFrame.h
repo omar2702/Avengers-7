@@ -9,7 +9,7 @@ private:
 	long long numero_columnas = 0;//preguntar al profe
 public:
 	vector<Fila*>* Filas;
-	vector < Columna*>*Columnas;
+	vector <Columna*>*Columnas;
 	DataFrame()
 	{
 		Filas = new vector<Fila*>;
@@ -19,6 +19,48 @@ public:
 		agregar_Columna_long();
 		agregar_Columna_String();
 	}
+
+	//DF* select(vector<string> colNames) { //Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
+	//	colmap* nCols = new colmap();
+	//	for (auto cn : colNames) {
+	//		nCols[cn] = cols[cn];
+	//	}
+	//	DF* nuevoDF(nCols);
+	//	nuevoDF->rows = this->rows;
+	//}
+
+	/*DF* filter(string numcol1, string op1, string val1, string numcol2="", string op2="", string val2=""){       ////FILTREAR
+
+		colmap* nCols = new colmap();
+
+		*nCols = this->Columnas;
+
+		vector<Fila*> nFilas;
+
+		for (auto r : this->Filas) {
+			if (compare(numCol1, op1, val1, r) && compare(numcol2, opc2, val2, r))
+				nFilas.push_back(r);
+		}
+	}*/
+
+	/*void index(string colname) {
+
+		AVLTree<Fila*, string>* t = new AVLTree<Row* r, string>([=](Row* r){ return r->getdata(colname) });
+
+		for (auto row : this->rows) {
+			t->Add(row);
+		}
+		trees[colname] = t; //mapa de árboles
+	}*/
+
+	
+	/*DF* sort(string colname) {            ////Ordenar////
+		colmap* nCols = new colmap();
+		*nCols = this->Columnas;
+		DF* nDF=nDF(nCols);
+		nDF->rows = this->rows;
+		quicksort<Fila*, string>(nDF->rows, [=](Fila* r) {return r->getdata(colname); })
+	}*/
 
 	void agregar_Fila()
 	{
