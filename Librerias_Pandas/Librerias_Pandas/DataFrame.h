@@ -1,23 +1,55 @@
 #pragma once
-#include"Columna.h"
+#include"columna.h"
 #include"Fila.h"
 
 class DataFrame
 {
 private:
-	long long numero_filas = 0;
-	long long numero_columnas = 0;//preguntar al profe
+	vector<Columna*>vector_columnas;
+	vector<Fila*>vector_Filas;
+	string ID;
 public:
-	vector<Fila*>* Filas;
-	vector <Columna*>*Columnas;
-	DataFrame()
-	{
-		Filas = new vector<Fila*>;
-		Columnas = new vector<Columna*>;
-		agregar_Columna_Bool();
-		agregar_Columna_double();
-		agregar_Columna_long();
-		agregar_Columna_String();
+	
+	long long numeros_col = 0;
+	long long counter_col = 0;
+	long long counter_Fil = 0;
+
+	DataFrame(string i) : ID(i){}
+	DataFrame(colmap* Cm) {
+		numeros_col = Cm->size();
+		counter_col = Cm->begin()->second->size();
+		for (auto it = Cm->begin(); it != Cm->end(); ++it) {
+			añadir_columna((*it).second);
+		}
+		for (long long i = 0; i < counter_col; i++) {
+			Fila* auxF = new Fila(i);
+			for (long long j = 0; j < numeros_col; j++) {
+				auxF->añadir_Col(this->atC(j));
+			}
+			this->añadir_Fila(auxF);
+		}
+	}
+	DataFrame() {}
+	void añadir_columna(Columna* Col) {
+		vector_columnas.push_back(Col);
+	}
+	void añadir_Fila(Fila* Fil) {
+		vector_Filas.push_back(Fil);
+	}
+	Columna* atC(long long id) { return vector_columnas.at(id); }
+	Fila* atF(long long id) { return vector_Filas.at(id); }
+
+	void PrintD() {
+		for (long long i = 0; i < vector_columnas.size(); i++) {
+			cout << vector_columnas[i]->get_nombre() << "\t";
+		}
+		cout << endl;
+		for (long long i = 0; i < vector_Filas.size(); i++) {
+			for (long long j = 0; j < vector_columnas.size(); j++) {
+				cout << vector_Filas[i]->getData(vector_columnas[j]->get_nombre()) << "\t";
+			}
+			cout << endl;
+		}
 	}
 
 	//DF* select(vector<string> colNames) { //Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
@@ -62,66 +94,5 @@ public:
 		quicksort<Fila*, string>(nDF->rows, [=](Fila* r) {return r->getdata(colname); })
 	}*/
 
-	void agregar_Fila()
-	{
-		/*long long I = 0;
-		Filas* aux = new Filas(I);
-
-		Filas->push_back(aux);
-
-		for (long long i = 0; i < numero_columnas; i++) {
-
-			if (Columnas->at(i)->getTipo() == "String")
-
-				aux->setPunteroString((ColumnaString*)Columnas->at(i));
-
-			if (Columnas->at(i)->getTipo() == "Long")
-
-				aux->setPunteroLong((ColumnaLong*)Columnas->at(i));
-
-			if (Columnas->at(i)->getTipo() == "Double")
-
-				aux->setPunteroDouble((ColumnaDouble*)Columnas->at(i));
-
-			if (Columnas->at(i)->getTipo() == "Bool")
-
-				aux->setPunteroBool((ColumnaBool*)Columnas->at(i));
-
-		}
-
-		aux->AsignarDatos();
-
-		numero_filas++;
-
-		I++;*/
-	}
-
-	void agregar_Columna_String()
-	{
-		Columnas->push_back(new ColumnaString());
-		numero_columnas++;
-	}
-	void agregar_Columna_Bool()
-	{
-		Columnas->push_back(new ColumnaBool());
-	}
-	void agregar_Columna_double()
-	{
-		Columnas->push_back(new ColumnaDouble());
-	}
-	void agregar_Columna_long()
-	{
-		Columnas->push_back(new ColumnaLong());
-	}
-	void mostrar() { 
-
-		cout << "String \t Long \t Double \t Bool" << endl; //Falta hacer que se alineen bien los nombres de las columnas
-
-		for (long long i = 0; i < numero_filas; i++) {
-
-			Filas->at(i)->mostrar();
-
-		}
-
-	}
+	
 };

@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="Columna.h" />
     <ClInclude Include="DataFrame.h" />
+    <ClInclude Include="Driver.h" />
     <ClInclude Include="Fila.h" />
   </ItemGroup>
   <ItemGroup>

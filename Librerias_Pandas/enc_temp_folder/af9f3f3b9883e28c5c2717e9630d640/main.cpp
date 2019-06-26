@@ -13,7 +13,7 @@ void e() {
 int main() {
 
 
-	/*Columna* c1 = new Columna("Nombres", 0);
+	Columna* c1 = new Columna("Nombres", 0);
 
 	c1->agregar("Hector");
 
@@ -165,7 +165,7 @@ int main() {
 
 	d1->PrintD();
 
-	Driver d1;*/
+	Driver d1;
 
 	/*d1.addFile("exampledb.csv");
 
