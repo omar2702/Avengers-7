@@ -15,7 +15,7 @@ int main() {
 
 	/*Columna* c1 = new Columna("Nombres", 0);
 
-	c1->agregar("Hector");
+	c1->defineColumna("Hector");
 
 	c1->agregar("Hector");
 
@@ -25,7 +25,7 @@ int main() {
 
 	Columna* c2 = new Columna("Telefono", 1);
 
-	c2->agregar("998562311");
+	c2->defineColumna("998562311");
 
 	c2->agregar("998562311");
 
@@ -39,17 +39,17 @@ int main() {
 
 	Fila* f3 = new Fila(2);
 
-	f1->añadir_Col(c1);
+	f1->addCol(c1);
 
-	f1->añadir_Col(c2);
+	f1->addCol(c2);
 
-	f2->añadir_Col(c1);
+	f2->addCol(c1);
 
-	f2->añadir_Col(c2);
+	f2->addCol(c2);
 
-	f3->añadir_Col(c1);
+	f3->addCol(c1);
 
-	f3->añadir_Col(c2);
+	f3->addCol(c2);
 
 	cout << f1->getData("Nombres"), e();
 
@@ -61,11 +61,11 @@ int main() {
 
 	cout << f3->getData("Nombres"), e();
 
-	cout << f3->getData("Telefono"), e();
+	cout << f3->getData("Telefono"), e();*/
 
-	
+	/*
 
-	DataFrame* d1 = new DataFrame("Dataframe1");
+	Dataframe* d1 = new Dataframe("Dataframe1");
 
 	Columna* c1 = new Columna("Nombres", 0);
 
@@ -89,15 +89,15 @@ int main() {
 
 	c5->agregar("true");
 
-	f1->añadir_Col(c1);
+	f1->addCol(c1);
 
-	f1->añadir_Col(c2);
+	f1->addCol(c2);
 
-	f1->añadir_Col(c3);
+	f1->addCol(c3);
 
-	f1->añadir_Col(c4);
+	f1->addCol(c4);
 
-	f1->añadir_Col(c5);
+	f1->addCol(c5);
 
 	Fila* f2 = new Fila(1);
 
@@ -111,15 +111,15 @@ int main() {
 
 	c5->agregar("true");
 
-	f2->añadir_Col(c1);
+	f2->addCol(c1);
 
-	f2->añadir_Col(c2);
+	f2->addCol(c2);
 
-	f2->añadir_Col(c3);
+	f2->addCol(c3);
 
-	f2->añadir_Col(c4);
+	f2->addCol(c4);
 
-	f2->añadir_Col(c5);
+	f2->addCol(c5);
 
 	Fila* f3 = new Fila(2);
 
@@ -133,69 +133,59 @@ int main() {
 
 	c5->agregar("true");
 
-	f3->añadir_Col(c1);
+	f3->addCol(c1);
 
-	f3->añadir_Col(c2);
+	f3->addCol(c2);
 
-	f3->añadir_Col(c3);
+	f3->addCol(c3);
 
-	f3->añadir_Col(c4);
+	f3->addCol(c4);
 
-	f3->añadir_Col(c5);
-
-
-
-	d1->añadir_columna(c1);
-
-	d1->añadir_columna(c2);
-
-	d1->añadir_columna(c3);
-
-	d1->añadir_columna(c4);
-
-	d1->añadir_columna(c5);
-
-	d1->añadir_Fila(f1);
-
-	d1->añadir_Fila(f2);
-
-	d1->añadir_Fila(f3);
+	f3->addCol(c5);
 
 
 
-	d1->PrintD();
+	d1->addCol(c1);
 
-	Driver d1;*/
+	d1->addCol(c2);
 
-	/*d1.addFile("exampledb.csv");
+	d1->addCol(c3);
 
-	d1.getDF(0)->PrintD(), e();*/
+	d1->addCol(c4);
 
-	//cout << d1.getDF(0)->atF(0)->getData("Nombres");
+	d1->addCol(c5);
 
-	/*for (auto i = 0; i < d1.getDF(0)->counterFil; i++) {
+	d1->addFil(f1);
 
+	d1->addFil(f2);
+
+	d1->addFil(f3);
+
+
+
+	d1->printD();*/
+
+	Driver d1;
+
+	d1.addFile("exampledb.csv");
+
+	d1.getDF(0)->PrintD(), e();
+
+	cout << d1.getDF(0)->atF(0)->getData("Nombres");
+
+	for (auto i = 0; i < d1.getDF(0)->counter_Fil; i++) {
 		for (auto it = d1.getDF(0)->atF(i)->getColmap()->begin(); it != d1.getDF(0)->atF(i)->getColmap()->end(); ++it) {
-
-			cout << (*it).second->getData(i) << " ";
-
+			cout << (*it).second->get_data(i) << " ";
 		}
-
 		e();
+	}
 
-	}*/
-
-	/*DataFrame* df2 = new DataFrame(d1.getDF(0)->atF(0)->getColmap());
-
+	DataFrame* df2 = new DataFrame(d1.getDF(0)->atF(0)->getColmap());
 	d1.vDF.push_back(df2);
-
 	d1.getDF(1)->PrintD(), e();
+	_getch();
+	d1.addFile("FL_insurance_sample.csv");
+	d1.getDF(1)->PrintD();
 
-	_getch();*/
-
-	//d1.addFile("FL_insurance_sample.csv");
-
-	//d1.getDF(1)->printD();
-
-	//_getch();
+	_getch();
 }

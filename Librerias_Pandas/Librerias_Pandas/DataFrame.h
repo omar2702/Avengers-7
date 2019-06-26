@@ -1,5 +1,5 @@
 #pragma once
-#include"columna.h"
+#include"Columna.h"
 #include"Fila.h"
 
 class DataFrame

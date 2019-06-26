@@ -1,5 +1,5 @@
 #pragma once
-#include "columna.h"
+#include "Columna.h"
 #include <map>
 
 typedef map<string, Columna*>colmap;
