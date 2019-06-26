@@ -51,6 +51,8 @@ public:
 			cout << endl;
 		}
 	}
+	long long FilaSize() { return vector_Filas.size(); }
+	long long ColumnaSize() { return vector_columnas.size(); }
 
 	//DF* select(vector<string> colNames) { //Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
 	//	colmap* nCols = new colmap();

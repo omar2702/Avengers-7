@@ -56,46 +56,84 @@ public:
 
 	bool compare(string nc1, string op, string value, Fila*  r)
 	{
-		if (op == ">") return r->getData(nc1) > value;
-		else if (op == "<") return r->getData(nc1) < value;
-		else if (op == "=") return r->getData(nc1) == value;
-		else if (op == "<=")return r->getData(nc1) <= value;
-		else if (op == ">=") return r->getData(nc1) >= value;
-		else if (op == "inciacon") {
-			if (r->getData(nc1).find(value) == 0) {
-				return true;
-			}
+		if (nc1 == "") return 1;
+		else if (op == "mayor") return mayor(r->getData(nc1), value);
+		else if (op == "menor") return menor(r->getData(nc1), value);
+		else if (op == "igual") return igual(r->getData(nc1), value);
+		else if (op == "incia")return inicia(r->getData(nc1), value);
+		else if (op == "finaliza") return finaliza(r->getData(nc1), value);
+		else if (op == "contenido") return contenido(r->getData(nc1), value);
+		else if (op == "nocontenido") return noContenido(r->getData(nc1), value);
+	}
+
+	bool mayor(string v1, string v2) {
+		if (v1[0] >= 48 && v1[0] <= 57) {
+			if (stod(v1) > stod(v2)) return 1;
+			else return 0;
 		}
-		else if (op == "finzalizacon") {
-			if (r->getData(nc1).find(value) == r->getData(nc1).size() - 1) {
-				return true;
-			}
+		if (v1 > v2) return 1;
+		return 0;
+	}
+	bool menor(string v1, string v2) {
+		if (v1[0] >= 48 && v1[0] <= 57) {
+			if (stod(v1) < stod(v2)) return 1;
+			else return 0;
 		}
-		else if (op == "contains") {
-			if (r->getData(nc1).find(value) >= 0) {
-				return true;
-			}
+		if (v1 < v2) return 1;
+		return 0;
+	}
+	bool igual(string v1, string v2) {
+		if (v1 == v2) return 1;
+		return 0;
+	}
+	bool inicia(string v1, string v2) {
+		for (long long i = 0; i < v2.size(); i++) {
+			if (v1[i] != v2[i]) return 0;
+			return 1;
 		}
-		else if (op == "nocontains") {
-			if (r->getData(nc1).find(value) < 0) {
-				return true;
-			}
+	}
+	bool finaliza(string v1, string v2) {
+		if (v1[v1.size() - 1] == v2[0]) return 1;
+		return 0;
+	}
+	bool contenido(string v1, string v2) {
+		for (long long i = 0; i < v1.size(); i++) {
+			if (v1[i] == v2[0]) return 1;
 		}
+		return 0;
+	}
+	bool noContenido(string v1, string v2) {
+		for (long long i = 0; i < v1.size(); i++) {
+			if (v1[i] == v2[0]) return 0;
+		}
+		return 1;
 	}
 
 	DataFrame* filter(long long idx, string nc1, string op1, string val1, string nc2 = "", string op2 = "", string val2 = "") {
 
-		colmap* nCols = new colmap();
-		*nCols = this->compare;
-		vector<Fila*>nFils;
-		DataFrame* nDF = new DataFrame(nCols);
+		DataFrame* nDF = new DataFrame();
+		for (long long i = 0; i < this->vDF[idx]->counter_Fil; i++) {
+			if (compare(nc1, op1, val1, this->vDF[idx]->atF(i)) && compare(nc2, op2, val2, this->vDF[idx]->atF(i))) {
+				nDF->añadir_Fila(this->vDF[idx]->atF(i));
+			}
+		}
+		return nDF;
 	}
 
-	DataFrame* seleccionar() {
+	void index(string col_nombre)
+	{
 
 	}
 
-	//////////////////////////////////////
+	DataFrame* seleccionar(vector<string> col_nombre) {
+		colmap* ncols = new colmap();
+		for (auto cn : col_nombre) {
+		}
+	}
+	DataFrame* sort(string col_nombre) {
+
+	}
+
 	/* DF filter(string numcol1, string op1, string val1, string numcol2 = "", string op2 = "", string val2 = "") {       ////FILTREAR
 		colmap* nCols = new colmap();
 		*nCols = this->Columnas;
@@ -105,11 +143,6 @@ public:
 				nFilas.push_back(r);
 		}
 	}*/
-		//////////////////////////////////////
-		DataFrame * select(long long col_nombres) {
-		colmap* ncols = new colmap();
-	}
-
 	//DF* select(vector<string> colNames) { 
 	//Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
 	//	colmap* nCols = new colmap();
