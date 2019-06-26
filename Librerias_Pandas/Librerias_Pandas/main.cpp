@@ -1,191 +1,120 @@
 #include <iostream>
 #include <conio.h>
 #include"Driver.h"
-
+#include<vector>
 #include <ctime>
 
 using namespace std;
 
-void e() {
-	cout << endl;
+void menu()
+{
+	cout << "[1] Cargar archivo\n"
+		<< "[2] Guardar DataFrame\n"
+		<< "[3] Listar DataFrames\n"
+		<< "[4] Crear DataFrame\n"
+		<< "[5] Mostrar DataFrame\n"
+		<< "[0] SALIR!\n"
+		<< "\n-- Ingrese una opción [0..5]: ";
 }
 
-int main() {
-
-
-	/*Columna* c1 = new Columna("Nombres", 0);
-
-	c1->defineColumna("Hector");
-
-	c1->agregar("Hector");
-
-	c1->agregar("Juan");
-
-	c1->agregar("Carlos");
-
-	Columna* c2 = new Columna("Telefono", 1);
-
-	c2->defineColumna("998562311");
-
-	c2->agregar("998562311");
-
-	c2->agregar("997543245");
-
-	c2->agregar("946336751");
-
-	Fila* f1 = new Fila(0);
-
-	Fila* f2 = new Fila(1);
-
-	Fila* f3 = new Fila(2);
-
-	f1->addCol(c1);
-
-	f1->addCol(c2);
-
-	f2->addCol(c1);
-
-	f2->addCol(c2);
-
-	f3->addCol(c1);
-
-	f3->addCol(c2);
-
-	cout << f1->getData("Nombres"), e();
-
-	cout << f1->getData("Telefono"), e();
-
-	cout << f2->getData("Nombres"), e();
-
-	cout << f2->getData("Telefono"), e();
-
-	cout << f3->getData("Nombres"), e();
-
-	cout << f3->getData("Telefono"), e();*/
-
-	/*
-
-	Dataframe* d1 = new Dataframe("Dataframe1");
-
-	Columna* c1 = new Columna("Nombres", 0);
-
-	Columna* c2 = new Columna("Apellidos", 1);
-
-	Columna* c3 = new Columna("Edad", 2);
-
-	Columna* c4 = new Columna("Altura", 3);
-
-	Columna* c5 = new Columna("Vivo", 4);
-
-	Fila* f1 = new Fila(0);
-
-	c1->agregar("Hector");
-
-	c2->agregar("Suzuki");
-
-	c3->agregar("18");
-
-	c4->agregar("1.70");
-
-	c5->agregar("true");
-
-	f1->addCol(c1);
-
-	f1->addCol(c2);
-
-	f1->addCol(c3);
-
-	f1->addCol(c4);
-
-	f1->addCol(c5);
-
-	Fila* f2 = new Fila(1);
-
-	c1->agregar("Carlos");
-
-	c2->agregar("Mazzarri");
-
-	c3->agregar("23");
-
-	c4->agregar("1.75");
-
-	c5->agregar("true");
-
-	f2->addCol(c1);
-
-	f2->addCol(c2);
-
-	f2->addCol(c3);
-
-	f2->addCol(c4);
-
-	f2->addCol(c5);
-
-	Fila* f3 = new Fila(2);
-
-	c1->agregar("Juan");
-
-	c2->agregar("Leyva");
-
-	c3->agregar("18");
-
-	c4->agregar("1.70");
-
-	c5->agregar("true");
-
-	f3->addCol(c1);
-
-	f3->addCol(c2);
-
-	f3->addCol(c3);
-
-	f3->addCol(c4);
-
-	f3->addCol(c5);
-
-
-
-	d1->addCol(c1);
-
-	d1->addCol(c2);
-
-	d1->addCol(c3);
-
-	d1->addCol(c4);
-
-	d1->addCol(c5);
-
-	d1->addFil(f1);
-
-	d1->addFil(f2);
-
-	d1->addFil(f3);
-
-
-
-	d1->printD();*/
-
-	Driver d1;
-
-	d1.addFile("exampledb.csv");
-
-	d1.getDF(0)->PrintD(), e();
-
-	cout << d1.getDF(0)->atF(0)->getData("Nombres");
-
-	for (auto i = 0; i < d1.getDF(0)->counter_Fil; i++) {
-		for (auto it = d1.getDF(0)->atF(i)->getColmap()->begin(); it != d1.getDF(0)->atF(i)->getColmap()->end(); ++it) {
-			cout << (*it).second->get_data(i) << " ";
-		}
-		e();
+void cargarDF(vector<DataFrame*>& dfs) {
+	string name;
+	cout << "Nombre del archivo: ";
+	cin.get();
+	getline(cin, name);
+	//TODO cargar archivo
+	//dfs.push_back(cargarDeArchivo(name));
+	dfs.push_back(new DataFrame());
+}
+void guardarDF(vector<DataFrame*>& dfs) {
+	int i;
+	string name;
+	do {
+		cout << "Seleccione un DF [1.." << dfs.size() << "] ";
+		cin >> i; --i;
+	} while (i < 0 | i >= dfs.size());
+	cout << "Nombre del archivo: "; getline(cin, name);
+	cin.get();
+	getline(cin, name);
+	//TODO guardar dataframe en archivo
+	// guardarDF(dfs[i], name);
+}
+void listarDFs(vector<DataFrame*>& dfs) {
+	int i = 0;
+	for (auto df : dfs)
+	{
+		cout << ++i << "]\n"; // TODO imprimir alguna otra informacion del DF
 	}
+}
+DataFrame* seleccionar(DataFrame* df) {
+	vector<string> cols;
+	string col;
+	do
+	{
+		cout << "Ingrese columna: ";
+		cin.get();
+		getline(cin, col);
+		if (col != "") cols.push_back(col);
+	} while (col != "");
+	if (cols.size() > 0)
+	{
+		return df.seleccionar(cols);
+	}
+	return nullptr;
+}
+DataFrame* filtrar(DataFrame* df) {}
+DataFrame* ordenar(DataFrame* df) {}
+void crearDF(vector<DataFrame*>& dfs) {
+	int i;
+	string name;
+	do
+	{
+		cout << "Seleccione un DF [1.." << dfs.size() << "]: ";
+		cin >> i; --i;
+	} while (i < 0 || i >= dfs.size());
+	char op;
+	do
+	{
+		cout << "[1] Seleccionar\n"
+			<< "[2] Filtrar\n"
+			<< "[3] Ordenar\n"
+			<< "[0] Cancelar\n"
+			<< "\n-- Ingrese una opción [0..3]: ";
+		cin >> op;
+		DataFrame* nuevo;
+		switch (op)
+		{
+		case '1': nuevo = seleccionar(dfs[i]); break;
+		case '2': nuevo = filtrar(dfs[i]); break;
+		case '3': nuevo = ordenar(dfs[i]); break;
+		}
+		if (nuevo != nullptr)
+		{
+			dfs.push_back(nuevo);
+		}
+	} while (op != 0);
 
-	DataFrame* df2 = new DataFrame(d1.getDF(0)->atF(0)->getColmap());
-	d1.vDF.push_back(df2);
-	d1.getDF(1)->PrintD(), e();
-	_getch();
-	d1.addFile("FL_insurance_sample.csv");
-	d1.getDF(1)->PrintD();
 
-	_getch();
+}
+void mostrarDF(vector<DataFrame*>& dfs) {}
+
+
+int main()
+{
+	char op;
+	vector<DataFrame*> dfs;
+	do
+	{
+		menu();
+		cin >> op;
+		switch (op)
+		{
+		case 0: cout << "Bye Bye!"; break;
+		case 1: cargarDF(dfs); break;
+		case 2: guardarDF(dfs); break;
+		case 3: listarDFs(dfs); break;
+		case 4: crearDF(dfs); break;
+		case 5: mostrarDF(dfs); break;
+		}
+	} while (op != 0);
 }

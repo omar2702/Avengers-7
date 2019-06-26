@@ -54,14 +54,88 @@ public:
 		f.close();
 	}
 
+	bool compare(string nc1, string op, string value, Fila*  r)
+	{
+		if (op == ">") return r->getData(nc1) > value;
+		else if (op == "<") return r->getData(nc1) < value;
+		else if (op == "=") return r->getData(nc1) == value;
+		else if (op == "<=")return r->getData(nc1) <= value;
+		else if (op == ">=") return r->getData(nc1) >= value;
+		else if (op == "inciacon") {
+			if (r->getData(nc1).find(value) == 0) {
+				return true;
+			}
+		}
+		else if (op == "finzalizacon") {
+			if (r->getData(nc1).find(value) == r->getData(nc1).size() - 1) {
+				return true;
+			}
+		}
+		else if (op == "contains") {
+			if (r->getData(nc1).find(value) >= 0) {
+				return true;
+			}
+		}
+		else if (op == "nocontains") {
+			if (r->getData(nc1).find(value) < 0) {
+				return true;
+			}
+		}
+	}
+
 	DataFrame* filter(long long idx, string nc1, string op1, string val1, string nc2 = "", string op2 = "", string val2 = "") {
 
 		colmap* nCols = new colmap();
-		for (long long i = 0; i < vDF.at(idx)->counter_Fil; i++) {
-			nCols = this->getDF(idx)->atF(i)->getColmap();
-		}
+		*nCols = this->compare;
 		vector<Fila*>nFils;
 		DataFrame* nDF = new DataFrame(nCols);
 	}
+
+	DataFrame* seleccionar() {
+
+	}
+
+	//////////////////////////////////////
+	/* DF filter(string numcol1, string op1, string val1, string numcol2 = "", string op2 = "", string val2 = "") {       ////FILTREAR
+		colmap* nCols = new colmap();
+		*nCols = this->Columnas;
+		vector<Fila*> nFilas;
+		for (auto r : this->Filas) {
+			if (compare(numCol1, op1, val1, r) && compare(numcol2, opc2, val2, r))
+				nFilas.push_back(r);
+		}
+	}*/
+		//////////////////////////////////////
+		DataFrame * select(long long col_nombres) {
+		colmap* ncols = new colmap();
+	}
+
+	//DF* select(vector<string> colNames) { 
+	//Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
+	//	colmap* nCols = new colmap();
+	//	for (auto cn : colNames) {
+	//		nCols[cn] = cols[cn];
+	//	}
+	//	DF* nuevoDF(nCols);
+	//	nuevoDF->rows = this->rows;
+	//}
+
+	/*void index(string colname) {
+	AVLTree<Fila*, string>* t = new AVLTree<Row* r, string>([=](Row* r){ return r->getdata(colname) });
+	for (auto row : this->rows) {
+	t->Add(row);
+	}
+	trees[colname] = t; //mapa de árboles
+	}*/
+
+
+	/* DF sort(string colname) {            ////Ordenar////
+		colmap* nCols = new colmap();
+		*nCols = this->Columnas;
+		DF* nDF = nDF(nCols);
+		nDF->rows = this->rows;
+		quicksort<Fila*, string>(nDF->rows, [=](Fila* r) {return r->getdata(colname); })
+	}*/
+
 
 };
