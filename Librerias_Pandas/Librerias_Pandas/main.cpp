@@ -58,7 +58,7 @@ DataFrame* seleccionar(DataFrame* df) {
 	} while (col != "");
 	if (cols.size() > 0)
 	{
-		return df.seleccionar(cols);
+		//return df.seleccionar(cols);
 	}
 	return nullptr;
 }

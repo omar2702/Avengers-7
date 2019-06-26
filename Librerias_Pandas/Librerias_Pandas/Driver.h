@@ -111,7 +111,7 @@ public:
 
 	DataFrame* filter(long long idx, string nc1, string op1, string val1, string nc2 = "", string op2 = "", string val2 = "") {
 
-		DataFrame* nDF = new DataFrame();
+		DataFrame* nDF = new DataFrame(/*this->vDF[idx]*/);
 		for (long long i = 0; i < this->vDF[idx]->counter_Fil; i++) {
 			if (compare(nc1, op1, val1, this->vDF[idx]->atF(i)) && compare(nc2, op2, val2, this->vDF[idx]->atF(i))) {
 				nDF->añadir_Fila(this->vDF[idx]->atF(i));
@@ -125,11 +125,21 @@ public:
 
 	}
 
-	DataFrame* seleccionar(vector<string> col_nombre) {
-		colmap* ncols = new colmap();
-		for (auto cn : col_nombre) {
+	/*DataFrame* seleccionar(long long idx, vector<string> numero_col) {
+		DataFrame* numero_DF = new DataFrame("seleccionar_" + this->vDF[idx]->id);
+		for (long long i = 0; i < this->vDF.at(idx)->ColumnaSize(); i++) {
+			if (numero_col[i] == this->vDF[idx]->atC(i)->get_nombre()) {
+				numero_DF->añadir_columna(this->vDF[idx]->atC(i));
+			}
+}
+		vector<Fila*> numero_F;
+		for (long long i = 0; i < this->vDF[idx]->FilaSize(); i++) {
+			for (long long j = 0; j < numero_DF->ColumnaSize(); j++) {
+				numero_DF->añadir_Fila(this->vDF[idx]->atF(j));
+			}
 		}
-	}
+		return numero_DF;
+	}*/
 	DataFrame* sort(string col_nombre) {
 
 	}
