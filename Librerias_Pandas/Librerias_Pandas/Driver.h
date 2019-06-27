@@ -10,12 +10,12 @@ using namespace std;
 class Driver {
 
 public:
-	vector<DataFrame*>vDF;
+	vector<DataFrame*>vector_DF;
 public:
 	Driver() {}
 	~Driver() {}
 	DataFrame* getDF(long long idx) {
-		return vDF.at(idx);
+		return vector_DF.at(idx);
 	}
 
 	int addFile(string filename) {
@@ -50,7 +50,7 @@ public:
 			}
 			auxD->counter_col = 0;
 		}
-		vDF.push_back(auxD);
+		vector_DF.push_back(auxD);
 		f.close();
 	}
 
@@ -111,10 +111,10 @@ public:
 
 	DataFrame* filter(long long idx, string nc1, string op1, string val1, string nc2 = "", string op2 = "", string val2 = "") {
 
-		DataFrame* nDF = new DataFrame(/*this->vDF[idx]*/);
-		for (long long i = 0; i < this->vDF[idx]->counter_Fil; i++) {
-			if (compare(nc1, op1, val1, this->vDF[idx]->atF(i)) && compare(nc2, op2, val2, this->vDF[idx]->atF(i))) {
-				nDF->añadir_Fila(this->vDF[idx]->atF(i));
+		DataFrame* nDF = new DataFrame(this->vector_DF[idx]);
+		for (long long i = 0; i < this->vector_DF[idx]->counter_Fil; i++) {
+			if (compare(nc1, op1, val1, this->vector_DF[idx]->atF(i)) && compare(nc2, op2, val2, this->vector_DF[idx]->atF(i))) {
+				nDF->añadir_Fila(this->vector_DF[idx]->atF(i));
 			}
 		}
 		return nDF;
@@ -125,60 +125,63 @@ public:
 
 	}
 
-	/*DataFrame* seleccionar(long long idx, vector<string> numero_col) {
-		DataFrame* numero_DF = new DataFrame("seleccionar_" + this->vDF[idx]->id);
-		for (long long i = 0; i < this->vDF.at(idx)->ColumnaSize(); i++) {
-			if (numero_col[i] == this->vDF[idx]->atC(i)->get_nombre()) {
-				numero_DF->añadir_columna(this->vDF[idx]->atC(i));
+	void merge(vector<Fila*> &vec, long long inicio, long long fin, string nombreColumna) {
+		long long length = (fin - inicio) + 1;
+		vector<Fila*> aux(length);
+		long long mid = (fin + inicio) / 2;
+		long long i = inicio;
+		long long j = mid + 1;
+		for (long long k = 0; i <= mid || j <= fin; k++) {
+			if (i > mid || j <= fin && vec[j]->getData(nombreColumna) < vec[i]->getData(nombreColumna)) {
+				aux[k] = vec[j];
+				j++;
+			}
+			else {
+				aux[k] = vec[i];
+				i++;
+			}
+		}
+		for (long long k = 0; k < length; k++) {
+			vec[inicio + k] = aux[k];
+		}
+	}
+
+	void sort(vector<Fila*> &vec, int i, int f, string nombreColumna) {
+		if (i < f) {
+			int mid = (f + i) / 2;
+			sort(vec, i, mid, nombreColumna);
+			sort(vec, mid + 1, f, nombreColumna);
+			merge(vec, i, f, nombreColumna);
+		}
+	}
+
+	void mergesort(vector<Fila*> &vec, string nombreColumna) {
+		sort(vec, 0, vec.size() - 1, nombreColumna);
+	}
+
+
+	DataFrame* OrdenarMerge(string nombreColumna, long long id) {
+		DataFrame* nDF = new DataFrame(this->vector_DF[id]);
+		for (long long i = 1; i < nDF->FilaSize(); i++) {
+			mergesort(nDF->vector_Filas, nombreColumna);
+		}
+		return nDF;
+	}
+
+
+	DataFrame* seleccionar(long long idx, vector<string> numero_col) {
+		DataFrame* numero_DF = new DataFrame("seleccionar_" + this->vector_DF[idx]->ID);
+		for (long long i = 0; i < this->vector_DF.at(idx)->ColumnaSize(); i++) {
+			if (numero_col[i] == this->vector_DF[idx]->atC(i)->get_nombre()) {
+				numero_DF->añadir_columna(this->vector_DF[idx]->atC(i));
 			}
 }
 		vector<Fila*> numero_F;
-		for (long long i = 0; i < this->vDF[idx]->FilaSize(); i++) {
+		for (long long i = 0; i < this->vector_DF[idx]->FilaSize(); i++) {
 			for (long long j = 0; j < numero_DF->ColumnaSize(); j++) {
-				numero_DF->añadir_Fila(this->vDF[idx]->atF(j));
+				numero_DF->añadir_Fila(this->vector_DF[idx]->atF(j));
 			}
 		}
 		return numero_DF;
-	}*/
-	DataFrame* sort(string col_nombre) {
-
 	}
-
-	/* DF filter(string numcol1, string op1, string val1, string numcol2 = "", string op2 = "", string val2 = "") {       ////FILTREAR
-		colmap* nCols = new colmap();
-		*nCols = this->Columnas;
-		vector<Fila*> nFilas;
-		for (auto r : this->Filas) {
-			if (compare(numCol1, op1, val1, r) && compare(numcol2, opc2, val2, r))
-				nFilas.push_back(r);
-		}
-	}*/
-	//DF* select(vector<string> colNames) { 
-	//Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
-	//	colmap* nCols = new colmap();
-	//	for (auto cn : colNames) {
-	//		nCols[cn] = cols[cn];
-	//	}
-	//	DF* nuevoDF(nCols);
-	//	nuevoDF->rows = this->rows;
-	//}
-
-	/*void index(string colname) {
-	AVLTree<Fila*, string>* t = new AVLTree<Row* r, string>([=](Row* r){ return r->getdata(colname) });
-	for (auto row : this->rows) {
-	t->Add(row);
-	}
-	trees[colname] = t; //mapa de árboles
-	}*/
-
-
-	/* DF sort(string colname) {            ////Ordenar////
-		colmap* nCols = new colmap();
-		*nCols = this->Columnas;
-		DF* nDF = nDF(nCols);
-		nDF->rows = this->rows;
-		quicksort<Fila*, string>(nDF->rows, [=](Fila* r) {return r->getdata(colname); })
-	}*/
-
-
 };

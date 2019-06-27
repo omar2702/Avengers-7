@@ -1,35 +1,29 @@
 #pragma once
-#include"Columna.h"
+#include<iostream>
 #include"Fila.h"
 
 class DataFrame
 {
 private:
 	vector<Columna*>vector_columnas;
+
+public:
+	vector<string>nombre_col;
 	vector<Fila*>vector_Filas;
 	string ID;
-public:
-	
+
 	long long numeros_col = 0;
 	long long counter_col = 0;
 	long long counter_Fil = 0;
 
 	DataFrame(string i) : ID(i){}
-	DataFrame(colmap* Cm) {
-		numeros_col = Cm->size();
-		counter_col = Cm->begin()->second->size();
-		for (auto it = Cm->begin(); it != Cm->end(); ++it) {
-			añadir_columna((*it).second);
-		}
-		for (long long i = 0; i < counter_col; i++) {
-			Fila* auxF = new Fila(i);
-			for (long long j = 0; j < numeros_col; j++) {
-				auxF->añadir_Col(this->atC(j));
-			}
-			this->añadir_Fila(auxF);
+	DataFrame(DataFrame* Cm) {
+		for (long long i = 0; i < Cm->nombre_col.size(); i++) {
+			añadir_columna(Cm->atF(0)->getColmap()->at(Cm->nombre_col[i]));
+			numeros_col++;
 		}
 	}
-	DataFrame() {}
+	~DataFrame() {}
 	void añadir_columna(Columna* Col) {
 		vector_columnas.push_back(Col);
 	}

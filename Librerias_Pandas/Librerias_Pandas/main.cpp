@@ -24,7 +24,7 @@ void cargarDF(vector<DataFrame*>& dfs) {
 	getline(cin, name);
 	//TODO cargar archivo
 	//dfs.push_back(cargarDeArchivo(name));
-	dfs.push_back(new DataFrame());
+	//dfs.push_back(new DataFrame());
 }
 void guardarDF(vector<DataFrame*>& dfs) {
 	int i;
@@ -62,8 +62,6 @@ DataFrame* seleccionar(DataFrame* df) {
 	}
 	return nullptr;
 }
-DataFrame* filtrar(DataFrame* df) {}
-DataFrame* ordenar(DataFrame* df) {}
 void crearDF(vector<DataFrame*>& dfs) {
 	int i;
 	string name;
@@ -96,6 +94,7 @@ void crearDF(vector<DataFrame*>& dfs) {
 
 
 }
+
 void mostrarDF(vector<DataFrame*>& dfs) {}
 
 
