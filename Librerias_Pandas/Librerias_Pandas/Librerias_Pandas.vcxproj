@@ -127,10 +127,9 @@
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="Columna.h" />
     <ClInclude Include="DataFrame.h" />
-    <ClInclude Include="Driver.h" />
     <ClInclude Include="Fila.h" />
-    <ClInclude Include="MetodosSort.h" />
-    <ClInclude Include="Metodos_Filtrar.h" />
+    <ClInclude Include="Filtreo.h" />
+    <ClInclude Include="sort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

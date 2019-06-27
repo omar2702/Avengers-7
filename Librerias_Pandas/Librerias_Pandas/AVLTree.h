@@ -1,4 +1,5 @@
 #include <functional>
+#include <map>
 #include <algorithm>
 template<typename T, typename R = T>
 class AVLTree {

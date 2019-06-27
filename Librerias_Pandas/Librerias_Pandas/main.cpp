@@ -1,23 +1,19 @@
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
-#include "Driver.h"
+#include "Archivo.h"
+#include <map>
 using namespace std;
 using namespace System;
 Driver d1;
 long long idxDF = -1;
-
-
-void crear() {
-
-}
 
 void importar_F() {
 	string filename;
 	cout << "\tIngrese el nombre del archivo a importar: ";
 	cin >> filename;
 	while (!d1.findFile(filename)) {
-		cout << endl;  cout << "\tError! Ingrese un nombre de archivo existente: ";
+		cout << endl;  cout << "\tError!, Archivo no existe. \nIngrese un nombre de archivo existente: ";
 		cin >> filename;
 	}
 	cout << endl;
@@ -27,22 +23,7 @@ void importar_F() {
 void logo() {
 	cout << "\tTRABAJO FINAL ALGORITMOS Y ESTRUCUTRA DE DATOS\n";
 }
-void intro() {
-	Console::SetWindowPosition(0, 0);
-	Console::SetWindowSize(137, 35);
-	string filename;
-	setlocale(LC_ALL, "spanish");
-	logo();
-	cout << "\tIngrese el nombre del archivo a importar: ";
-	cin >> filename;
-	while (!d1.findFile(filename)) {
-		cout << endl; cout << "\tError! Ingrese un nombre de archivo existente: ";
-		cin >> filename;
-	}
-	cout << endl;
-	d1.addFile(filename), idxDF++;
-	d1.getDF(idxDF)->printD(), cout << endl;
-}
+
 void mostrar() {
 	cout << "Introduzca el indice del dataframe a mostrar: ";
 	cout << endl; d1.printvDF(), cout << endl, cout << endl;
@@ -113,7 +94,7 @@ void filtrar() {
 	d1.vDF.push_back(d1.filter(idxDF - 1, nc1, op1, val1, nc2, op2, val2));
 	d1.vDF[d1.vDF.size() - 1]->printD(), cout << endl, cout << endl;
 }
-void exportF() {
+void exportar_F() {
 	string nombreDF;
 	cout << "Introduzca el indice del dataframe a exportar: ";
 	cout << endl, d1.printvDF(), cout << endl;
@@ -162,7 +143,7 @@ void menu() {
 			filtrar();
 			break;
 		case '7':
-			exportF();
+			exportar_F();
 			break;
 		default:
 			break;

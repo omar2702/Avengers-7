@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <map>
 #include "Fila.h"
 #include "AVLTree.h"
 class Dataframe {

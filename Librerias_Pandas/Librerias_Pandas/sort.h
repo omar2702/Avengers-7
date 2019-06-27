@@ -1,10 +1,12 @@
 #pragma once
 #include"Fila.h"
-void merge(vector<Fila*> &vec, long long inicio, long long fin, string nombreColumna) {
-	long long length = (fin - inicio) + 1;
+#include <map>
+//METODOS SORT
+void merge(vector<Fila*> &vec, long long ini, long long fin, string nombreColumna) {
+	long long length = (fin - ini) + 1;
 	vector<Fila*> aux(length);
-	long long mid = (fin + inicio) / 2;
-	long long i = inicio;
+	long long mid = (fin + ini) / 2;
+	long long i = ini;
 	long long j = mid + 1;
 	for (long long k = 0; i <= mid || j <= fin; k++) {
 		if (i > mid || j <= fin && vec[j]->getData(nombreColumna) < vec[i]->getData(nombreColumna)) {
@@ -17,7 +19,7 @@ void merge(vector<Fila*> &vec, long long inicio, long long fin, string nombreCol
 		}
 	}
 	for (long long k = 0; k < length; k++) {
-		vec[inicio + k] = aux[k];
+		vec[ini + k] = aux[k];
 	}
 }
 
