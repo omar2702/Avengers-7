@@ -1,91 +1,91 @@
 #pragma once
-#include<functional>
-#include<algorithm>
-
-template<typename T, typename R=T >
+#include <functional>
+#include <algorithm>
+template<typename T, typename R = T>
 class AVLTree {
-	struct Node
-	{
+	struct Node {
 		T e;
-		Node* izquierda; //left
-		Node* derecha; //right
+		Node* l;
+		Node* r;
 		int h;
-		Node(T e) : e(e), izquierda(nullptr), derecha(nullptr), h(0){}
+		Node(T e) : e(e), l(nullptr), r(nullptr), h(0) {}
 		static int height(Node* n) {
-			return n = nullptr ? -1 : n->h;
+			return n == nullptr ? -1 : n->h;
 		}
 		void updateH() {
-			h = std::max(Node::height(izquierda), Node::height(derecha)) + 1;
+			h = std::max(Node::height(l), Node::height(r)) + 1;
 		}
 	};
 	Node* root;
-	int lenght;
+	int length;
 	std::function<R(T)> key;
 
 	void destroy(Node* n) {
 		if (n != nullptr) {
-			destroy(n->izquierda);
-			destroy(n->derecha);
+			destroy(n->l);
+			destroy(n->r);
 			delete n;
 		}
 	}
-	void roatAB(Node*& n) {
-		Node* aux = n->izquierda;
-		n->izquierda = aux->derecha;
+	void rotAB(Node*& n) {
+		Node* aux = n->l;
+		n->l = aux->r;
 		n->updateH();
-		aux->derecha = n;
+		aux->r = n;
 		n = aux;
 		n->updateH();
 	}
-	void roatBA(Node*& n) {
-		Node* aux = n->derecha;
-		n->derecha = aux->izquierda;
+	void rotBA(Node*& n) {
+		Node* aux = n->r;
+		n->r = aux->l;
 		n->updateH();
-		aux->izquierda = n;
+		aux->l = n;
 		n = aux;
 		n->updateH();
 	}
-
 	void balance(Node*& n) {
-		int delta = Node::height(n->izquierda) - Node::height(n->derecha);
+		int delta = Node::height(n->l) - Node::height(n->r);
 		if (delta < -1) {
-			if (Node::height(n->derecha->izquierda) > Node::height(n->derecha->derecha)) {
-				roatAB(n->derecha);
+			if (Node::height(n->r->l) > Node::height(n->r->r)) {
+				rotAB(n->r);
 			}
-			else if (delta > 1) {
-				if (Node::height(n->izquierda->derecha) > Node::height(n->izquierda->izquierda)) {
-					roatBA(n->izquierda);
-				}
-				roatAB(n);
+			rotBA(n);
+		}
+		else if (delta > 1) {
+			if (Node::height(n->l->r) > Node::height(n->l->l)) {
+				rotBA(n->l);
 			}
+			rotAB(n);
 		}
 	}
-		void add(Node*& n, T e) {
-			if (n = nullptr) {
-				n = new Node(e);
-				return;
-			}
-			else if (key(e) < key(n->e)) {
-				add(n->izquierda, e);
-			}
-			else {
-				add(n->derecha, e);
-			}
-			balance(n);
-			n->updateH();
+	void add(Node*& n, T e) {
+		if (n == nullptr) {
+			n = new Node(e);
+			return;
 		}
-	public:
-		AVLTree(std::function<R(T)> key = [](T a) {return a; }) : root(nullptr), lenght(0), key(key){}
-		~AVLTree() { destroy(root); }
-
-		int Height() {
-			return Node::height(root);
+		else if (key(e) < key(n->e)) {
+			add(n->l, e);
 		}
-		int Size() {
-			return lenght;
+		else {
+			add(n->r, e);
 		}
-		void Add(T e) {
-			add(root, e);
-			++lenght;
-		}
+		balance(n);
+		n->updateH();
+	}
+public:
+	AVLTree(std::function<R(T)>key = [](T a) {return a; }) : root(nullptr), length(0), key(key) {}
+	~AVLTree() { destroy(root); }
+	int Height() {
+		return Node::height(root);
+	}
+	int Size() {
+		return length;
+	}
+	void Add(T e) {
+		add(root, e);
+		++length;
+	}
+	Node* getNode(T e) {
+		return
+	}
 };

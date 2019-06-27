@@ -3,23 +3,18 @@
 #include <map>
 
 typedef map<string, Columna*>colmap;
-
 class Fila {
 protected:
 	long long indice;
 	colmap* cols;
-
 public:
 	Fila(long long idx) : indice(idx) { cols = new colmap; }
-
-	void añadir_Col(Columna* c) {
-		(*cols)[c->get_nombre()] = c;
+	void addCol(Columna* c) {
+		(*cols)[c->getNombre()] = c;
 	}
-
 	string getData(string name) {
-		return cols->at(name)->get_data(indice);
+		return cols->at(name)->getData(indice);
 	}
-
 	colmap* getColmap() {
 		return cols;
 	}

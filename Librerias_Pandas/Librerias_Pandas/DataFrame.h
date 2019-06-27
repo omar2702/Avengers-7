@@ -1,94 +1,59 @@
 #pragma once
 #include<iostream>
 #include"Fila.h"
+#include"AVLTree.h"
 
-class DataFrame
-{
+class Dataframe {
 private:
-	vector<Columna*>vector_columnas;
-
+	vector<Columna*>vCols;
+	vector<Fila*>vFils;
+	map<string, AVLTree<Fila*, string>*> mapTree;
 public:
-	vector<string>nombre_col;
-	vector<Fila*>vector_Filas;
-	string ID;
+	string id;
+	vector<string>nombreCols;
+	long long numCol = 0;
+	long long counterCol = 0;
+	long long counterFil = 0;
 
-	long long numeros_col = 0;
-	long long counter_col = 0;
-	long long counter_Fil = 0;
-
-	DataFrame(string i) : ID(i){}
-	DataFrame(DataFrame* Cm) {
-		for (long long i = 0; i < Cm->nombre_col.size(); i++) {
-			añadir_columna(Cm->atF(0)->getColmap()->at(Cm->nombre_col[i]));
-			numeros_col++;
+	Dataframe(string i) : id(i) {}
+	Dataframe(Dataframe* df) {
+		for (long long i = 0; i < df->nombreCols.size(); i++) {
+			addCol(df->atF(0)->getColmap()->at(df->nombreCols[i]));
+			numCol++;
 		}
 	}
-	~DataFrame() {}
-	void añadir_columna(Columna* Col) {
-		vector_columnas.push_back(Col);
-	}
-	void añadir_Fila(Fila* Fil) {
-		vector_Filas.push_back(Fil);
-	}
-	Columna* atC(long long id) { return vector_columnas.at(id); }
-	Fila* atF(long long id) { return vector_Filas.at(id); }
+	~Dataframe() {}
 
-	void PrintD() {
-		for (long long i = 0; i < vector_columnas.size(); i++) {
-			cout << vector_columnas[i]->get_nombre() << "\t";
+	void addCol(Columna* c) {
+		vCols.push_back(c);
+		nombreCols.push_back(c->getNombre());
+	}
+	void addFil(Fila* f) {
+		vFils.push_back(f);
+	}
+
+
+	vector<Fila*>getFils() { return vFils; }
+	vector<Columna*>getCols() { return vCols; }
+	Columna* atC(long long idx) { return vCols.at(idx); }
+	Fila* atF(long long idx) { return vFils.at(idx); }
+
+	void printD() {
+		for (long long i = 0; i < vCols.size(); i++) {
+			cout << vCols[i]->getNombre() << "\t";
 		}
 		cout << endl;
-		for (long long i = 0; i < vector_Filas.size(); i++) {
-			for (long long j = 0; j < vector_columnas.size(); j++) {
-				cout << vector_Filas[i]->getData(vector_columnas[j]->get_nombre()) << "\t";
+		for (long long i = 0; i < vFils.size(); i++) {
+			for (long long j = 0; j < vCols.size(); j++) {
+				cout << vFils[i]->getData(vCols[j]->getNombre()) << "\t";
 			}
 			cout << endl;
 		}
 	}
-	long long FilaSize() { return vector_Filas.size(); }
-	long long ColumnaSize() { return vector_columnas.size(); }
 
-	//DF* select(vector<string> colNames) { //Retorna un DataFrame. Para escoger de las columnas totales que se tienen cuáles se quieren seleccionar. Puede ser en cualquier orden
-	//	colmap* nCols = new colmap();
-	//	for (auto cn : colNames) {
-	//		nCols[cn] = cols[cn];
-	//	}
-	//	DF* nuevoDF(nCols);
-	//	nuevoDF->rows = this->rows;
-	//}
+	long long filasSize() { return vFils.size(); }
+	long long colSize() { return vCols.size(); }
 
-	/*DF* filter(string numcol1, string op1, string val1, string numcol2="", string op2="", string val2=""){       ////FILTREAR
-
-		colmap* nCols = new colmap();
-
-		*nCols = this->Columnas;
-
-		vector<Fila*> nFilas;
-
-		for (auto r : this->Filas) {
-			if (compare(numCol1, op1, val1, r) && compare(numcol2, opc2, val2, r))
-				nFilas.push_back(r);
-		}
-	}*/
-
-	/*void index(string colname) {
-
-		AVLTree<Fila*, string>* t = new AVLTree<Row* r, string>([=](Row* r){ return r->getdata(colname) });
-
-		for (auto row : this->rows) {
-			t->Add(row);
-		}
-		trees[colname] = t; //mapa de árboles
-	}*/
-
-	
-	/*DF* sort(string colname) {            ////Ordenar////
-		colmap* nCols = new colmap();
-		*nCols = this->Columnas;
-		DF* nDF=nDF(nCols);
-		nDF->rows = this->rows;
-		quicksort<Fila*, string>(nDF->rows, [=](Fila* r) {return r->getdata(colname); })
-	}*/
-
-	
+	map<string, AVLTree<Fila*, string>*> getMapTree() { return mapTree; }
+	void setTree(string nombreColumna, AVLTree<Fila*, string>*auxT) { mapTree[nombreColumna] = auxT; }
 };
