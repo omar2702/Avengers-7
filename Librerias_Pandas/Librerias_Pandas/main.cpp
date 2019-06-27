@@ -12,7 +12,7 @@ void crear() {
 
 }
 
-void importF() {
+void importar_F() {
 	string filename;
 	cout << "\tIngrese el nombre del archivo a importar: ";
 	cin >> filename;
@@ -134,7 +134,6 @@ void opciones() {
 	cout << "\t8. Salir del programa", cout << endl, cout << endl;
 }
 void menu() {
-	intro();
 	string opcion;
 	while (opcion != "8") {
 		opciones();
@@ -145,7 +144,7 @@ void menu() {
 		switch (opcion[0])
 		{
 		case '1':
-			importF();
+			importar_F();
 			break;
 		case '2':
 			mostrar();
