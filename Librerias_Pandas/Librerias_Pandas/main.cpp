@@ -7,6 +7,11 @@ using namespace System;
 Driver d1;
 long long idxDF = -1;
 
+
+void crear() {
+
+}
+
 void importF() {
 	string filename;
 	cout << "\tIngrese el nombre del archivo a importar: ";
@@ -26,7 +31,7 @@ void intro() {
 	Console::SetWindowPosition(0, 0);
 	Console::SetWindowSize(137, 35);
 	string filename;
-	//setlocale(LC_ALL, "spanish");
+	setlocale(LC_ALL, "spanish");
 	logo();
 	cout << "\tIngrese el nombre del archivo a importar: ";
 	cin >> filename;
