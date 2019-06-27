@@ -61,3 +61,5 @@ Los cronogramas podran ser visualizados en Github Milestones
 VI) Plan de trabajo detallado
 -----------------------------
 El proyeto estará disponible para todos los integrantes del grupo; no obsante, constará de 3 copias y uno principal gracias a que GitHub nos permite crear nuevas ramas podemos cambiar el código continuamente y mostralo a los demás integrantes del grupo. Ademas de esto, GitHub nos permite utilizar herramientas como los milestones e issues los cuales nos permitiran asignar tareas y completarlas progresivamente. Los milestones son tareas en paquetes, de esta manera estarán elaborados los entregables e hitos se encontraran dentro de los issues. De esta manera nuestro plan de trabajo serpa eficiente y podremos ver el avance de cada integrante.
+
+# Nota 17
