@@ -13,7 +13,7 @@ void importar_F() {
 	cout << "\tIngrese el nombre del archivo a importar: ";
 	cin >> filename;
 	while (!d1.findFile(filename)) {
-		cout << endl;  cout << "\tError!, Archivo no existe. \nIngrese un nombre de archivo existente: ";
+		cout << endl;  cout << "\tError! Ingrese un nombre de archivo existente: ";
 		cin >> filename;
 	}
 	cout << endl;
