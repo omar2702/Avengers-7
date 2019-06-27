@@ -1,4 +1,3 @@
-#pragma once
 #include <functional>
 #include <algorithm>
 template<typename T, typename R = T>

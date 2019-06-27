@@ -1,7 +1,6 @@
 #pragma once
 #include "Columna.h"
 #include <map>
-
 typedef map<string, Columna*>colmap;
 class Fila {
 protected:

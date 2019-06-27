@@ -13,7 +13,12 @@ public:
 	Dataframe* getDF(long long idx) {
 		return vDF.at(idx);
 	}
-	int addFile(string filename) {
+	bool findFile(string filename) {
+		ifstream f(filename);
+		if (f.is_open()) return 1;
+		return 0;
+	}
+	bool addFile(string filename) {
 		Dataframe* auxD = new Dataframe(filename);
 		ifstream f(filename);
 		string line, num;
@@ -56,7 +61,7 @@ public:
 		f.close();
 		return 0;
 	}
-	int exportFile(Dataframe* df, string filename) {
+	bool exportFile(Dataframe* df, string filename) {
 		ofstream archivo(filename, ios::out);
 
 #pragma region FormatHandler
@@ -121,5 +126,10 @@ public:
 			t->Add(row);
 		}
 		this->vDF[idx]->setTree(nombreColumna, t);
+	}
+	void printvDF() {
+		for (long long i = 0; i < vDF.size(); i++) {
+			cout << endl << i + 1 << ". " << vDF[i]->id << endl;
+		}
 	}
 };

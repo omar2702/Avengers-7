@@ -1,8 +1,7 @@
 #pragma once
-#include<iostream>
-#include"Fila.h"
-#include"AVLTree.h"
-
+#include <iostream>
+#include "Fila.h"
+#include "AVLTree.h"
 class Dataframe {
 private:
 	vector<Columna*>vCols;
@@ -21,6 +20,7 @@ public:
 			addCol(df->atF(0)->getColmap()->at(df->nombreCols[i]));
 			numCol++;
 		}
+		id = "modded_" + df->id;
 	}
 	~Dataframe() {}
 
@@ -39,13 +39,30 @@ public:
 	Fila* atF(long long idx) { return vFils.at(idx); }
 
 	void printD() {
+		cout << "Mostrando Dataframe " << id << endl << endl;
 		for (long long i = 0; i < vCols.size(); i++) {
-			cout << vCols[i]->getNombre() << "\t";
+			if (vCols[i]->getNombre().size() < 8) {
+				cout << vCols[i]->getNombre() << "\t\t";
+			}
+			else if (vCols[i]->getNombre().size() >= 8) {
+				for (int u = 0; u < 8; u++) {
+					cout << vCols[i]->getNombre()[u];
+				}
+				cout << "..\t";
+			}
 		}
 		cout << endl;
 		for (long long i = 0; i < vFils.size(); i++) {
 			for (long long j = 0; j < vCols.size(); j++) {
-				cout << vFils[i]->getData(vCols[j]->getNombre()) << "\t";
+				if (vFils[i]->getData(vCols[j]->getNombre()).size() < 8) {
+					cout << vFils[i]->getData(vCols[j]->getNombre()) << "\t\t";
+				}
+				else if (vFils[i]->getData(vCols[j]->getNombre()).size() >= 8) {
+					for (int u = 0; u < 8; u++) {
+						cout << vFils[i]->getData(vCols[j]->getNombre())[u];
+					}
+					cout << "..\t";
+				}
 			}
 			cout << endl;
 		}

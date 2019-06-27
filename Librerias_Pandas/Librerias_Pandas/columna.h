@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include"Fila.h"
+#include "Fila.h"
 using namespace std;
 
 class Columna {
