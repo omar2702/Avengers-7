@@ -131,10 +131,10 @@ void menu() {
 			mostrar();
 			break;
 		case '3':
-			indexar();
+			
 			break;
 		case '4':
-			ordenar();
+			
 			break;
 		case '5':
 			seleccionar();
